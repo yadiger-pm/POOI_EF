@@ -1,0 +1,44 @@
+﻿@model IEnumerable<POOI_EF_MEDRANO.Models.Consumidor>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-success alert-dismissible" role="alert" style="font-weight: bold;">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        @ViewBag.Mensaje
+    </div>
+}
+
+<p style="margin-bottom: 20px;">
+    @Html.ActionLink("+ Registrar Nuevo Consumidor", "Create", null, new { @class = "btn btn-success btn-lg" })
+</p>
+<table class="table table-striped table-hover table-bordered" style="margin-top: 20px; border-radius: 8px; overflow: hidden;">
+    <tr style="background-color: #beb4d1; color: white;">
+        <th>@Html.DisplayNameFor(model => model.DNI)</th>
+        <th>@Html.DisplayNameFor(model => model.Nombres)</th>
+        <th>@Html.DisplayNameFor(model => model.Apellidos)</th>
+        <th>@Html.DisplayNameFor(model => model.Email)</th>
+        <th>@Html.DisplayNameFor(model => model.Pais)</th>
+        <th class="text-center">Acciones</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="vertical-align: middle;">@Html.DisplayFor(modelItem => item.DNI)</td>
+            <td style="vertical-align: middle;">@Html.DisplayFor(modelItem => item.Nombres)</td>
+            <td style="vertical-align: middle;">@Html.DisplayFor(modelItem => item.Apellidos)</td>
+            <td style="vertical-align: middle;">@Html.DisplayFor(modelItem => item.Email)</td>
+            <td style="vertical-align: middle;">@Html.DisplayFor(modelItem => item.Pais)</td>
+            <td class="text-center">
+                @Html.ActionLink("Editar", "Update", new { id = item.DNI }, new { @class = "btn btn-warning btn-sm", @style = "color: black; font-weight: bold;" })
+                @Html.ActionLink("Detalles", "Details", new { id = item.DNI }, new { @class = "btn btn-info btn-sm", @style = "color: black; font-weight: bold;" })
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.DNI }, new { @class = "btn btn-danger btn-sm", @style = "font-weight: bold;", onclick = "return confirm('¿Seguro que desea eliminar este registro?');" })
+            </td>
+        </tr>
+    }
+</table>
